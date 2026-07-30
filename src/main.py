@@ -11,7 +11,7 @@ app = FastAPI(title="Zensoft Sales Forecast API")
 create_tables()
 
 # Veriyi yükle ve modeli eğit
-DATA_PATH = r"C:\Users\MONSTER\OneDrive\Desktop\veri.csv\train.csv"
+DATA_PATH = "data/raw/train.csv"
 df = load_data(DATA_PATH)
 df = preprocess(df)
 monthly_sales = get_monthly_sales(df)

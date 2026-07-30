@@ -14,3 +14,4 @@ python-dotenv==1.0.0
 jupyter==1.0.0
 ipykernel==6.29.0
 pydantic==2.6.0
+cmdstanpy==1.2.4
