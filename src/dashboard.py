@@ -3,7 +3,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import requests
 import pandas as pd
-
+API_URL = "https://zensoft-sales-forecast-production.up.railway.app"
 st.set_page_config(
     page_title="Zensoft Sales Forecast",
     page_icon="assets/icon.png",
@@ -51,7 +51,7 @@ with col_left:
     if st.button(" Tahmin Al", type="primary", use_container_width=True):
         with st.spinner("Model tahmin yapıyor..."):
             try:
-                response = requests.get(f"http://127.0.0.1:8000/predict/{months}")
+                response = requests.get(f"{API_URL}/predict/{months}")
                 data = response.json()
                 df = pd.DataFrame(data)
 
@@ -87,7 +87,7 @@ with col_right:
     st.subheader("Tahmin Tablosu")
     if st.button(" Veriyi Getir", use_container_width=True):
         try:
-            response = requests.get(f"http://127.0.0.1:8000/predict/{months}")
+            response = requests.get(f"{API_URL}/predictions/history")
             data = response.json()
             df = pd.DataFrame(data)
             df['yhat'] = df['yhat'].round(0).astype(int)
@@ -104,7 +104,7 @@ st.divider()
 st.subheader("Geçmiş Tahminler")
 if st.button(" Geçmişi Göster", use_container_width=True):
     try:
-        response = requests.get("http://127.0.0.1:8000/predictions/history")
+        response = requests.get(f"{API_URL}/predictions/history")
         data = response.json()
         df_history = pd.DataFrame(data)
         st.dataframe(df_history, use_container_width=True)
